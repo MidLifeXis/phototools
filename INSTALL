@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cp -f src/split_scan ~/bin/.
+chmod 555 ~/bin/split_scan
+
