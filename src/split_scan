@@ -1,0 +1,28 @@
+#!/bin/sh
+
+if [ ${#} -ne 3 ]; then
+    cat<<EOM
+Usage: $0 outputtemplate archivelocation inputfile
+
+    outputtemplate  = filename base for output, including directory and png
+
+    archivelocation = directory to move the intput file into
+
+This script is currently finicky.  
+
+EOM
+    exit 1
+fi
+
+outputfile="$1"; shift
+archivelocation="$1"; shift
+
+echo "Bursting ${1}..."
+
+echo ~/bin/multicrop -d 2 -b white -i no -f 10 -u 1 "$1" "${outputfile}" 1>&2
+~/bin/multicrop -d 2 -b white -i no -f 10 -u 1 "$1" "${outputfile}" 1>&2
+
+echo mv -v "$1" "${archivelocation}" 1>&2
+mv -v "$1" "${archivelocation}" 1>&2
+
+echo "... done"
